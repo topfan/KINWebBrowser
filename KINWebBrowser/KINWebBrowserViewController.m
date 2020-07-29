@@ -190,6 +190,16 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 }
 #pragma mark - WKNavigationDelegate
 
+-(void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"style"
+    ofType:@"css"];
+    NSString* content = [NSString stringWithContentsOfFile:path
+    encoding:NSUTF8StringEncoding
+       error:NULL];
+    NSString *js = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = '\(%@)'; document.head.appendChild(style);", content];
+    [webView evaluateJavaScript:js completionHandler:nil];
+}
+
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
     if(webView == self.wkWebView) {
         [self updateToolbarState];
