@@ -191,13 +191,23 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 #pragma mark - WKNavigationDelegate
 
 -(void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    //Load CSS
     NSString* path = [[NSBundle mainBundle] pathForResource:@"style"
     ofType:@"css"];
     NSString* content = [NSString stringWithContentsOfFile:path
     encoding:NSUTF8StringEncoding
        error:NULL];
-    NSString *js = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = '\(%@)'; document.head.appendChild(style);", content];
-    [webView evaluateJavaScript:js completionHandler:nil];
+    NSString *CSSJS = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = '\(%@)'; document.head.appendChild(style);", content];
+    [webView evaluateJavaScript:CSSJS completionHandler:nil];
+    
+    //Load JavaScript
+    NSString* JSPath = [[NSBundle mainBundle] pathForResource:@"office_scheduler"
+    ofType:@"js"];
+    NSString* JSContent = [NSString stringWithContentsOfFile:JSPath
+    encoding:NSUTF8StringEncoding
+       error:NULL];
+//    NSString *CSSJS = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = '\(%@)'; document.head.appendChild(style);", JSContent];
+    [webView evaluateJavaScript:JSContent completionHandler:nil];
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
