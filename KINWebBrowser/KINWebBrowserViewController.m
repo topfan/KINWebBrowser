@@ -201,8 +201,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     CSSJS = [CSSJS stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
     CSSJS = [CSSJS stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
     CSSJS = [CSSJS stringByReplacingOccurrencesOfString:@"\r" withString:@""];
-    [webView evaluateJavaScript:CSSJS completionHandler:^(id Nullable script, NSError * Nullable error) {
-    }];
+    [webView evaluateJavaScript:CSSJS completionHandler:nil];
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
