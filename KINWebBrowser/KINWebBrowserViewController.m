@@ -272,6 +272,33 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     return nil;
 }
 
+-(void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(nonnull NSString *)message initiatedByFrame:(nonnull WKFrameInfo *)frame completionHandler:(nonnull void (^)(BOOL))completionHandler {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    //Add Buttons
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Yes"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+        //Handle your yes please button action here
+        completionHandler(YES);
+    }];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                               actionWithTitle:@"Cancel"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+        completionHandler(NO);
+    }];
+    
+    //Add your buttons to alert controller
+    
+    [alertController addAction:yesButton];
+    [alertController addAction:noButton];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 #pragma mark - Toolbar State
 
 - (void)updateToolbarState {
