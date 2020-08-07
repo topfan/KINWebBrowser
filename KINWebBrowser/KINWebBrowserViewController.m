@@ -277,7 +277,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     //Add Buttons
     
     UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Yes"
+                                actionWithTitle:@"OK"
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action) {
         //Handle your yes please button action here
