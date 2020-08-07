@@ -192,22 +192,17 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 -(void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
     //Load CSS
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"style"
-    ofType:@"css"];
-    NSString* content = [NSString stringWithContentsOfFile:path
-    encoding:NSUTF8StringEncoding
-       error:NULL];
-    NSString *CSSJS = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = '\(%@)'; document.head.appendChild(style);", content];
-    [webView evaluateJavaScript:CSSJS completionHandler:nil];
-    
-    //Load JavaScript
-    NSString* JSPath = [[NSBundle mainBundle] pathForResource:@"office_scheduler"
-    ofType:@"js"];
-    NSString* JSContent = [NSString stringWithContentsOfFile:JSPath
-    encoding:NSUTF8StringEncoding
-       error:NULL];
-//    NSString *CSSJS = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = '\(%@)'; document.head.appendChild(style);", JSContent];
-    [webView evaluateJavaScript:JSContent completionHandler:nil];
+    NSString *cssFile = @"style.css";
+    NSString *cssFilePath = [[NSBundle mainBundle] pathForResource:cssFile ofType:nil];
+    NSURL *cssURL = [NSURL fileURLWithPath:cssFilePath];
+    NSString *cssCode = [NSString stringWithContentsOfFile:cssURL.path encoding:NSUTF8StringEncoding error:nil];
+    NSString *CSSJS = [NSString stringWithFormat:@"var style = document.createElement('style'); style.innerHTML = %@; document.head.appendChild(style);", cssCode];
+    CSSJS = [CSSJS stringByReplacingOccurrencesOfString:@"\'" withString:@"\\\'"];
+    CSSJS = [CSSJS stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    CSSJS = [CSSJS stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    CSSJS = [CSSJS stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    [webView evaluateJavaScript:CSSJS completionHandler:^(id Nullable script, NSError * Nullable error) {
+    }];
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {

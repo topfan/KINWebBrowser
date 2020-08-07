@@ -19,7 +19,7 @@ overflow: hidden;
 padding: 10px 7px;
 }
 .office-schedule-list .event-set::before {
-content: "";
+content: '';
 position: absolute;
 width: 100%;
 height: 100%;
@@ -413,7 +413,6 @@ cursor: pointer;
 color: #000;
 }
 
-/*new css*/
 .no-slider a {
 float: left;
 width: 20%;
@@ -481,7 +480,6 @@ padding: 5px 16px;
 -ms-flex-item-align: start;
 align-self: flex-start;
 }
-/*new css*/
 
 
 .get-info-popup {
@@ -616,7 +614,6 @@ padding-left: 10px;
 .cancel-link:visited {
 color: #e00000;
 }
-/ waiting list css /
 .wait-listing {
 margin: 0 -10px;
 min-height: 196px;
@@ -660,7 +657,6 @@ color: #fff;
 font-size: 16px;
 }
 
-/ waiting list css /
 @media (min-width: 1025px) {
 .new-modal .get-info-popup button.close {
 margin: 0;
@@ -748,7 +744,6 @@ font-family: 'robotoregular', sans-serif;
 .map-set .map-name {
 padding: 8px 22px;
 }
-/ new css /
 .office-schedule-switch-btn {
 margin: 21px auto 0;
 float: none !important;
@@ -790,7 +785,6 @@ margin-top: 20px;
 -ms-flex-item-align: start;
 align-self: flex-start;
 }
-/ new css /
 }
 
 @media (max-width: 480px) {
@@ -800,7 +794,6 @@ width: 234px;
 .office-schedule-list.owl-carousel.owl-loaded .owl-stage-outer {
 overflow: unset;
 }
-/*new css*/
 .office-schedule-list-outer.no-slider-outer {
 width: 100%;
 }
@@ -808,5 +801,4 @@ width: 100%;
 width: 50%;
 min-width: 50%;
 }
-/*new css*/
 }
